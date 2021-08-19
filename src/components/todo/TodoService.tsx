@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import Item from "antd/lib/list/Item";
 import { useState, useEffect } from "react";
 
 export type Itodo = {
@@ -26,12 +27,16 @@ export const useTodo = () => {
   };
 
   const toggleTodo = (id: number) => {
-    //@TODO
+    const checkedTodo = todoState.map((check) => ({
+      ...check,
+      done: check.id === id ? !check.done : check.done,
+    }));
+    setTodoState(checkedTodo);
   };
 
   const removeTodo = (id: number) => {
     setTodoState((prevState) =>
-      prevState.filter((todo: Itodo) => todo.id === id)
+      prevState.filter((todo: Itodo) => todo.id !== id)
     );
   };
 
