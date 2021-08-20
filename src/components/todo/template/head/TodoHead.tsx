@@ -7,6 +7,27 @@ interface DateTimeFormatOptions {
   day?: "numeric" | "2-digit";
 }
 
+const date: Date = new Date();
+const options: DateTimeFormatOptions = {
+  year: "2-digit",
+  month: "2-digit",
+  day: "numeric",
+};
+
+const TodoHead = () => {
+  const today = date.toLocaleDateString("ko-Kr", options);
+  const weekday = date.toLocaleDateString("ko-Kr", { weekday: "long" });
+
+  return (
+    <TodoHeadBlock>
+      <DateText>{today}</DateText>
+      <DayText>{weekday}</DayText>
+    </TodoHeadBlock>
+  );
+};
+
+export default React.memo(TodoHead);
+
 const TodoHeadBlock = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,24 +49,3 @@ const DayText = styled.div`
   color: #119955;
   padding-top: 5px;
 `;
-
-const TodoHead = () => {
-  //@TODO 현재 시간을 표시해야합니다.
-  const date: Date = new Date();
-  const options: DateTimeFormatOptions = {
-    year: "2-digit",
-    month: "2-digit",
-    day: "numeric",
-  };
-  const today = date.toLocaleDateString("ko-Kr", options);
-  const weekday = date.toLocaleDateString("ko-Kr", { weekday: "long" });
-
-  return (
-    <TodoHeadBlock>
-      <DateText>{today}</DateText>
-      <DayText>{weekday}</DayText>
-    </TodoHeadBlock>
-  );
-};
-
-export default React.memo(TodoHead);
