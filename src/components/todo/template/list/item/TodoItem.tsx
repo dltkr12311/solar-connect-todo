@@ -9,6 +9,8 @@ interface TodoItemProps {
   todo: Itodo;
 }
 
+const today: Date = new Date();
+
 const TodoItem = ({ toggleTodo, removeTodo, todo }: TodoItemProps) => {
   const handleToggle = () => {
     toggleTodo(todo.id);
@@ -79,7 +81,6 @@ const CheckCircle = styled.div<{ done: boolean }>`
 const Text = styled.div<{ done: boolean }>`
   flex: 1;
   font-size: 16px;
-  color: #119955;
   ${(props) =>
     props.done &&
     css`

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, Modal } from "antd";
 import moment from "moment";
 import { Itodo } from "components/todo/TodoService";
 
@@ -25,22 +25,35 @@ const TodoCreate = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value);
 
-  const handleDateChange = (dateObj: any, dateStr: string): void => {
-    const newData = dateObj.format(dateFormat);
-    setDate(newData);
+  //DatePicker
+  const handleDateChange = (dateObj: any): void => {
+    const newDate = dateObj.format(dateFormat);
+    setDate(newDate);
   };
+
+  //Modal
+  const Warning = () => {
+    Modal.warning({
+      title: "글 작성",
+      content: "todo를 작성해 주세요",
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // 새로고침 방지
-
-    createTodo({
-      id: nextId,
-      text: value,
-      done: false,
-      expDate: date,
-    });
-    incrementNextId(); // nextId 하나 증가
-    setValue(""); // input 초기화
-    setOpen(false); // open 닫기
+    if (value === "") {
+      Warning();
+    } else {
+      createTodo({
+        id: nextId,
+        text: value,
+        done: false,
+        expDate: date,
+      });
+      incrementNextId(); // nextId 하나 증가
+      setValue(""); // input 초기화
+      setOpen(false); // open 닫기
+    }
   };
 
   return (
