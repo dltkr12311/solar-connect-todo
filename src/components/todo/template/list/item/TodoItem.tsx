@@ -9,8 +9,6 @@ interface TodoItemProps {
   todo: Itodo;
 }
 
-const today: Date = new Date();
-
 const TodoItem = ({ toggleTodo, removeTodo, todo }: TodoItemProps) => {
   const handleToggle = () => {
     toggleTodo(todo.id);
