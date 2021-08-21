@@ -43,8 +43,9 @@ export const useTodo = () => {
   };
 
   const createTodo = (todo: Itodo) => {
-    //todo 리스트길이의 1을 추가하는게 아니라 유니크한 아이디 값을 추가해야 한다.
-    const nextId = todoState[todoState.length - 1].id + 1;
+    const nextId = todoState.length
+      ? todoState[todoState.length - 1].id + 1
+      : todoState.length + 1;
     setTodoState((prevState) =>
       prevState.concat({
         ...todo,

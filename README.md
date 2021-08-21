@@ -32,3 +32,5 @@
 - [x] 노션에 작성함.
 
 ## 배포
+
+[배포링크!!](https://hardcore-kowalevski-8994da.netlify.app)
