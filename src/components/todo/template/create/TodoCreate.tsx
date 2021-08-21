@@ -34,7 +34,7 @@ const TodoCreate = ({
   //Modal
   const Warning = () => {
     Modal.warning({
-      title: "글 작성",
+      title: "todo를 작성해 주세요",
       content: "todo를 작성해 주세요",
     });
   };

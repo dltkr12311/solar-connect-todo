@@ -12,7 +12,7 @@ let initialTodos: Itodo[] = [];
 
 export const useTodo = () => {
   const [todoState, setTodoState] = useState(initialTodos);
-  var nextIdState = 0;
+  const [nextIdState, setNextIdState] = useState(0);
 
   useEffect(() => {
     loadData();
@@ -23,7 +23,9 @@ export const useTodo = () => {
   }, [todoState]);
 
   const incrementNextId = () => {
-    nextIdState = nextIdState + 1;
+    if (!nextIdState) {
+      setNextIdState(nextIdState + 1);
+    }
   };
 
   const toggleTodo = (id: number) => {
@@ -41,7 +43,8 @@ export const useTodo = () => {
   };
 
   const createTodo = (todo: Itodo) => {
-    const nextId = todoState.length + 1;
+    //todo 리스트길이의 1을 추가하는게 아니라 유니크한 아이디 값을 추가해야 한다.
+    const nextId = todoState[todoState.length - 1].id + 1;
     setTodoState((prevState) =>
       prevState.concat({
         ...todo,
@@ -57,6 +60,7 @@ export const useTodo = () => {
     if (initialTodos && initialTodos.length >= 1) {
       incrementNextId();
     }
+
     setTodoState(initialTodos);
   };
 
